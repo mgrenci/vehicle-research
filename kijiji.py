@@ -3,15 +3,15 @@ from requests_html import HTMLSession
 session = HTMLSession()
 
 # Url path with filters pre-applied. 
-honda_civic = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/honda-civic-2006__2014-new__used/c174l1700241a54a1000054a68a49?radius=77.0&address=Woodstock%2C+ON&ll=43.131497,-80.747165&for-sale-by=ownr'
+honda_civic = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/honda-civic-2006__2014-new__used/c174l1700241a54a1000054a68a49?radius=77.0&address=Woodstock%2C+ON&&for-sale-by=ownr'
 # Chevy Cruze
-chevy_cruze = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/chevrolet-cruze-2006__2014-new__used/c174l1700241a54a1000054a68a49?ll=43.131497%2C-80.747165&for-sale-by=ownr&address=Woodstock%2C+ON&radius=77.0'
+chevy_cruze = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/chevrolet-cruze-2006__2014-new__used/c174l1700241a54a1000054a68a49?&for-sale-by=ownr&address=Woodstock%2C+ON&radius=77.0'
 # Dodge Dart 
-dodge_dart = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/dodge-dart-2006__2014/c174l1700241a54a1000054a68?radius=77.0&address=Woodstock%2C+ON&ll=43.131497,-80.747165&for-sale-by=ownr'
+dodge_dart = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/dodge-dart-2006__2014/c174l1700241a54a1000054a68?radius=77.0&address=Woodstock%2C+ON&&for-sale-by=ownr'
 # Volkswagen Jetta 
-volkswagen_jetta = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/volkswagen-jetta-2006__2014/c174l1700241a54a1000054a68?radius=77.0&address=Woodstock%2C+ON&ll=43.131497,-80.747165&for-sale-by=ownr'
+volkswagen_jetta = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/volkswagen-jetta-2006__2014/c174l1700241a54a1000054a68?radius=77.0&address=Woodstock%2C+ON&&for-sale-by=ownr'
 # Volkswagen Golf 
-volkswagen_golf = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/volkswagen-golf-2006__2014/c174l1700241a54a1000054a68?radius=77.0&address=Woodstock%2C+ON&ll=43.131497,-80.747165&for-sale-by=ownr'
+volkswagen_golf = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/volkswagen-golf-2006__2014/c174l1700241a54a1000054a68?radius=77.0&address=Woodstock%2C+ON&&for-sale-by=ownr'
 
 
 urls = [honda_civic, chevy_cruze, dodge_dart, volkswagen_golf, volkswagen_jetta]
