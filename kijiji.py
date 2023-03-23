@@ -3,18 +3,16 @@ from requests_html import HTMLSession
 session = HTMLSession()
 
 # Url path with filters pre-applied. 
-honda_civic = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/honda-civic-2006__2014-new__used/c174l1700241a54a1000054a68a49?radius=77.0&address=Woodstock%2C+ON&&for-sale-by=ownr'
+honda = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/honda-2006__2014-new__used/c174l1700241a54a68a49?for-sale-by=ownr'
 # Chevy Cruze
-chevy_cruze = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/chevrolet-cruze-2006__2014-new__used/c174l1700241a54a1000054a68a49?&for-sale-by=ownr&address=Woodstock%2C+ON&radius=77.0'
+chevy = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/chevrolet-2006__2014-new__used/c174l1700241a54a68a49?for-sale-by=ownr'
 # Dodge Dart 
-dodge_dart = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/dodge-dart-2006__2014/c174l1700241a54a1000054a68?radius=77.0&address=Woodstock%2C+ON&&for-sale-by=ownr'
+dodge = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/dodge-2006__2014-new__used/c174l1700241a54a68a49?for-sale-by=ownr'
 # Volkswagen Jetta 
-volkswagen_jetta = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/volkswagen-jetta-2006__2014/c174l1700241a54a1000054a68?radius=77.0&address=Woodstock%2C+ON&&for-sale-by=ownr'
+volkswagen= 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/volkswagen-2006__2014-new__used/c174l1700241a54a68a49?for-sale-by=ownr'
 # Volkswagen Golf 
-volkswagen_golf = 'https://www.kijiji.ca/b-cars-trucks/woodstock-on/volkswagen-golf-2006__2014/c174l1700241a54a1000054a68?radius=77.0&address=Woodstock%2C+ON&&for-sale-by=ownr'
 
-
-urls = [honda_civic, chevy_cruze, dodge_dart, volkswagen_golf, volkswagen_jetta]
+urls = [honda, chevy, dodge, volkswagen]
 
 def main(url):
     r = session.get(url)
@@ -25,7 +23,8 @@ def main(url):
     description_list = []
     distance_list = []
     vehicle_key = []
-    date_list = []
+    links = []
+    cleaned_links = []
 
     infos = r.html.find('.info')
     list_length = len(infos)
@@ -39,35 +38,35 @@ def main(url):
     titles = r.html.find('a.title')
     for title in titles:
         title_list.append(title.text)
+        links = title.absolute_links
+        for link in links: 
+            cleaned_links.append(link)
 
     descriptions = r.html.find('.description')
     for description in descriptions:
         description_list.append(description.text)
 
-    distances = r.html.find('.distance')
+    distances = r.html.find('.location')
     for distance in distances: 
         distance_list.append(distance.text)
 
-    dates = r.html.find('.date-posted')
-    for date in dates: 
-        date_list.append(date.text)
-
     for x in range(list_length):
-        my_dict[vehicle_key[x]] = {'title': title_list[x], 'price':price_list[x], 'distance':distance_list[x], 'date-posted':date_list[x], 'description':description_list[x]}
+        my_dict[vehicle_key[x]] = {'title': title_list[x], 'price':price_list[x], 'distance':distance_list[x], 'description':description_list[x], 'link':cleaned_links[x]}
 
     return my_dict 
 
 
-txt_files = ['honda-civic', 'chevy-cruze', 'dodge-dart', 'volkswagen-golf', 'volkswagen-jetta']
+txt_files = ['honda', 'chevy', 'dodge', 'volkswagen']
 count = 0
 for url in urls:
     my_dict = main(url)
-    with open(txt_files[count]+'.txt', 'w') as f:
+    with open(txt_files[count]+'.txt', 'w', encoding="utf-8") as f:
         count += 1
         for key in my_dict:
             f.write("\n")
             for obj in my_dict[key]:
                 f.write("%s\n"%my_dict[key][obj])
+                
             
 
 
